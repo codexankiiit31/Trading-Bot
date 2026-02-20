@@ -1,0 +1,324 @@
+2026-02-20 13:38:28,403 | DEBUG    | __main__ | main:133 | CLI args: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:38:28,405 | DEBUG    | bot.client | __init__:67 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 13:38:28,406 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:38:28,406 | INFO     | bot.client | place_order:210 | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:38:28,406 | DEBUG    | bot.client | _request:106 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.001, 'timestamp': 1771574908406, 'signature': '4aa3790cfc188c604ef50da1556d9d236879b790bd375c24bdfef7d878d3324d'}
+2026-02-20 13:38:28,409 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 13:38:28,507 | ERROR    | bot.client | _request:122 | Network error: POST https://testnet.binancefuture.com/fapi/v1/order — HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 13:38:28,511 | ERROR    | bot.orders | place_order:139 | Order failed — unexpected error: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 13:38:28,513 | ERROR    | __main__ | main:170 | Unexpected error during order placement
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\anaconda3\Lib\socket.py", line 964, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\cli.py", line 148, in main
+    place_order(
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\orders.py", line 123, in place_order
+    response = client.place_order(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\client.py", line 214, in place_order
+    return self._request("POST", "/fapi/v1/order", params=params, signed=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\client.py", line 109, in _request
+    response = self._session.request(
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 13:46:19,228 | DEBUG    | __main__ | main:133 | CLI args: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:46:19,228 | DEBUG    | bot.client | __init__:67 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 13:46:19,229 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:46:19,230 | INFO     | bot.client | place_order:210 | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:46:19,230 | DEBUG    | bot.client | _request:106 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.001, 'timestamp': 1771575379230, 'signature': '8ca655e16c8a39193b24824def96a8da59b7aa463d275f5aac2da43c6cc5fff2'}
+2026-02-20 13:46:19,231 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 13:46:19,324 | ERROR    | bot.client | _request:122 | Network error: POST https://testnet.binancefuture.com/fapi/v1/order — HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 13:46:19,325 | ERROR    | bot.orders | place_order:139 | Order failed — unexpected error: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 13:46:19,326 | ERROR    | __main__ | main:170 | Unexpected error during order placement
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\anaconda3\Lib\socket.py", line 964, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\cli.py", line 148, in main
+    place_order(
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\orders.py", line 123, in place_order
+    response = client.place_order(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\client.py", line 214, in place_order
+    return self._request("POST", "/fapi/v1/order", params=params, signed=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\client.py", line 109, in _request
+    response = self._session.request(
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 13:56:30,264 | DEBUG    | __main__ | main:133 | CLI args: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:56:30,264 | DEBUG    | bot.client | __init__:67 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 13:56:30,265 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:56:30,265 | INFO     | bot.client | place_order:210 | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:56:30,266 | DEBUG    | bot.client | _request:106 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.001, 'timestamp': 1771575990266, 'signature': 'b1c13f003e1e9362cdebd001fbdf1a0bad3a4402b4f642b8f923624836f5682f'}
+2026-02-20 13:56:30,267 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 13:56:31,265 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "POST /fapi/v1/order HTTP/1.1" 400 88
+2026-02-20 13:56:31,265 | DEBUG    | bot.client | _request:125 | ← HTTP 400 | body={"code":-1021,"msg":"Timestamp for this request was 1000ms ahead of the server's time."}
+2026-02-20 13:56:31,266 | ERROR    | bot.client | _request:137 | Binance API error: {'code': -1021, 'msg': "Timestamp for this request was 1000ms ahead of the server's time."}
+2026-02-20 13:56:31,266 | ERROR    | bot.orders | place_order:131 | Order failed — BinanceAPIError: [HTTP 400] Binance Error -1021: Timestamp for this request was 1000ms ahead of the server's time.
+2026-02-20 13:58:33,356 | DEBUG    | __main__ | main:133 | CLI args: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:58:33,357 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 13:58:34,375 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "GET /fapi/v1/time HTTP/1.1" 200 28
+2026-02-20 13:58:34,376 | DEBUG    | bot.client | _sync_server_time:83 | Server time synced. Offset: -3056ms
+2026-02-20 13:58:34,376 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 13:58:34,376 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:58:34,377 | INFO     | bot.client | place_order:225 | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:58:34,377 | DEBUG    | bot.client | _request:121 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.001, 'timestamp': 1771576111321, 'signature': '12638c2f40e8e8a3b5d725875d5cc544bfedc28bd6d019db8c3da8d6a2972b29'}
+2026-02-20 13:58:34,593 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "POST /fapi/v1/order HTTP/1.1" 400 100
+2026-02-20 13:58:34,593 | DEBUG    | bot.client | _request:140 | ← HTTP 400 | body={"code":-4164,"msg":"Order's notional must be no smaller than 100 (unless you choose reduce only)."}
+2026-02-20 13:58:34,594 | ERROR    | bot.client | _request:152 | Binance API error: {'code': -4164, 'msg': "Order's notional must be no smaller than 100 (unless you choose reduce only)."}
+2026-02-20 13:58:34,594 | ERROR    | bot.orders | place_order:131 | Order failed — BinanceAPIError: [HTTP 400] Binance Error -4164: Order's notional must be no smaller than 100 (unless you choose reduce only).
+2026-02-20 13:59:01,729 | DEBUG    | __main__ | main:133 | CLI args: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:59:01,731 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 13:59:02,400 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "GET /fapi/v1/time HTTP/1.1" 200 28
+2026-02-20 13:59:02,400 | DEBUG    | bot.client | _sync_server_time:83 | Server time synced. Offset: -3036ms
+2026-02-20 13:59:02,400 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 13:59:02,400 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:59:02,402 | INFO     | bot.client | place_order:225 | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None
+2026-02-20 13:59:02,402 | DEBUG    | bot.client | _request:121 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.001, 'timestamp': 1771576139366, 'signature': 'f3f7b9e7a802173d444ae6c7f270be10174a46d1da956480858cf648d4efabc0'}
+2026-02-20 13:59:02,601 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "POST /fapi/v1/order HTTP/1.1" 400 100
+2026-02-20 13:59:02,602 | DEBUG    | bot.client | _request:140 | ← HTTP 400 | body={"code":-4164,"msg":"Order's notional must be no smaller than 100 (unless you choose reduce only)."}
+2026-02-20 13:59:02,602 | ERROR    | bot.client | _request:152 | Binance API error: {'code': -4164, 'msg': "Order's notional must be no smaller than 100 (unless you choose reduce only)."}
+2026-02-20 13:59:02,602 | ERROR    | bot.orders | place_order:131 | Order failed — BinanceAPIError: [HTTP 400] Binance Error -4164: Order's notional must be no smaller than 100 (unless you choose reduce only).
+2026-02-20 13:59:51,936 | DEBUG    | __main__ | main:133 | CLI args: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 13:59:51,938 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 13:59:52,038 | WARNING  | bot.client | _sync_server_time:85 | Could not sync server time: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/time (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)")) — using local clock
+2026-02-20 13:59:52,038 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 13:59:52,038 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 13:59:52,039 | INFO     | bot.client | place_order:225 | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 13:59:52,039 | DEBUG    | bot.client | _request:121 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.002, 'timestamp': 1771576192039, 'signature': 'de787a5abddf93c16206c854194c050c803d8a190129dd76dd52aedf365b9fdb'}
+2026-02-20 13:59:52,040 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (2): testnet.binancefuture.com:443
+2026-02-20 13:59:52,137 | ERROR    | bot.client | _request:137 | Network error: POST https://testnet.binancefuture.com/fapi/v1/order — HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 13:59:52,138 | ERROR    | bot.orders | place_order:139 | Order failed — unexpected error: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 13:59:52,139 | ERROR    | __main__ | main:170 | Unexpected error during order placement
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\anaconda3\Lib\socket.py", line 964, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\cli.py", line 148, in main
+    place_order(
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\orders.py", line 123, in place_order
+    response = client.place_order(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\client.py", line 229, in place_order
+    return self._request("POST", "/fapi/v1/order", params=params, signed=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\bot\client.py", line 124, in _request
+    response = self._session.request(
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ankit\.gemini\antigravity\scratch\trading_bot\venv\Lib\site-packages\requests\adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 14:02:12,429 | DEBUG    | __main__ | main:133 | CLI args: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 14:02:12,430 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 14:02:12,523 | WARNING  | bot.client | _sync_server_time:85 | Could not sync server time: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/time (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)")) — using local clock
+2026-02-20 14:02:12,524 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 14:02:12,524 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 14:02:12,525 | INFO     | bot.client | place_order:231 | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 14:02:12,525 | DEBUG    | bot.client | _request:123 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.002, 'timestamp': 1771576332525, 'signature': '84fe41844b430a790d9266c77dfb534c18c629ee1960ecca37bb8433d7b05329'}
+2026-02-20 14:02:12,526 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (2): testnet.binancefuture.com:443
+2026-02-20 14:02:12,590 | WARNING  | bot.client | _request:139 | Network error attempt 1/3: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 14:02:14,592 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (3): testnet.binancefuture.com:443
+2026-02-20 14:02:15,257 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "POST /fapi/v1/order HTTP/1.1" 200 None
+2026-02-20 14:02:15,260 | DEBUG    | bot.client | _request:146 | ← HTTP 200 | body={"orderId":12412093428,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"XO48KFa35cfPxKUs2PrBBs","price":"0.00","avgPrice":"0.00","origQty":"0.002","executedQty":"0.000","cumQty":"0.000","cumQuote":"0.00000","timeInForce":"GTC","type":"MARKET","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"0.00","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"MARKET","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"updateTim
+2026-02-20 14:02:15,262 | INFO     | bot.orders | place_order:147 | Order placed successfully: orderId=12412093428 status=NEW
+2026-02-20 14:09:55,470 | DEBUG    | __main__ | main:133 | CLI args: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 14:09:55,472 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 14:09:56,105 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "GET /fapi/v1/time HTTP/1.1" 200 28
+2026-02-20 14:09:56,105 | DEBUG    | bot.client | _sync_server_time:83 | Server time synced. Offset: -3025ms
+2026-02-20 14:09:56,105 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 14:09:56,105 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 14:09:56,107 | INFO     | bot.client | place_order:231 | Placing order: symbol=BTCUSDT side=BUY type=MARKET qty=0.002 price=None
+2026-02-20 14:09:56,108 | DEBUG    | bot.client | _request:123 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.002, 'timestamp': 1771576793083, 'signature': '894be753e58667bf3b50f9ff0987a1f9d41882b41b7e7d8714ab60b47e14d531'}
+2026-02-20 14:09:56,371 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "POST /fapi/v1/order HTTP/1.1" 200 None
+2026-02-20 14:09:56,372 | DEBUG    | bot.client | _request:146 | ← HTTP 200 | body={"orderId":12412225500,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"gb7nJgoxLptPXW9YOQGRz8","price":"0.00","avgPrice":"0.00","origQty":"0.002","executedQty":"0.000","cumQty":"0.000","cumQuote":"0.00000","timeInForce":"GTC","type":"MARKET","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"0.00","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"MARKET","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"updateTim
+2026-02-20 14:09:56,374 | INFO     | bot.orders | place_order:147 | Order placed successfully: orderId=12412225500 status=NEW
+2026-02-20 14:14:28,235 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 14:14:28,331 | WARNING  | bot.client | _sync_server_time:85 | Could not sync server time: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/time (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)")) — using local clock
+2026-02-20 14:14:28,332 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 14:16:04,379 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 14:16:04,484 | WARNING  | bot.client | _sync_server_time:85 | Could not sync server time: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/time (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)")) — using local clock
+2026-02-20 14:16:04,485 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 14:16:04,485 | DEBUG    | bot.client | list_orders:248 | Listing orders: symbol=BTCUSDT limit=10
+2026-02-20 14:16:04,485 | DEBUG    | bot.client | _request:123 | → GET https://testnet.binancefuture.com/fapi/v1/allOrders | params={'symbol': 'BTCUSDT', 'limit': 10, 'timestamp': 1771577164485, 'signature': '444ecbf3df380fdea106f01381b200d51fe5d74bcb330ee5c9840f1a06904a4e'}
+2026-02-20 14:16:04,486 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (2): testnet.binancefuture.com:443
+2026-02-20 14:16:04,555 | WARNING  | bot.client | _request:139 | Network error attempt 1/3: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/allOrders?symbol=BTCUSDT&limit=10&timestamp=1771577164485&signature=444ecbf3df380fdea106f01381b200d51fe5d74bcb330ee5c9840f1a06904a4e (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 14:16:06,557 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (3): testnet.binancefuture.com:443
+2026-02-20 14:16:07,240 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "GET /fapi/v1/allOrders?symbol=BTCUSDT&limit=10&timestamp=1771577164485&signature=444ecbf3df380fdea106f01381b200d51fe5d74bcb330ee5c9840f1a06904a4e HTTP/1.1" 200 None
+2026-02-20 14:16:07,240 | DEBUG    | bot.client | _request:146 | ← HTTP 200 | body=[{"orderId":12412093428,"symbol":"BTCUSDT","status":"FILLED","clientOrderId":"XO48KFa35cfPxKUs2PrBBs","price":"0","avgPrice":"67841.50000","origQty":"0.002","executedQty":"0.002","cumQuote":"135.68300","timeInForce":"GTC","type":"MARKET","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"0","workingType":"CONTRACT_PRICE","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"priceProtect":false,"origType":"MARKET","time":1771576332206
+2026-02-20 14:16:24,193 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 14:16:24,780 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "GET /fapi/v1/time HTTP/1.1" 200 28
+2026-02-20 14:16:24,780 | DEBUG    | bot.client | _sync_server_time:83 | Server time synced. Offset: -3016ms
+2026-02-20 14:16:24,780 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 14:16:24,780 | DEBUG    | bot.client | get_order:239 | Querying order: symbol=BTCUSDT order_id=12412093428
+2026-02-20 14:16:24,781 | DEBUG    | bot.client | _request:123 | → GET https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'orderId': 12412093428, 'timestamp': 1771577181765, 'signature': '1d36dfacab467b81ed973de616f6cfb8deb5c1aa4d0ea48d6c6ee0b79a2ac146'}
+2026-02-20 14:16:25,000 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "GET /fapi/v1/order?symbol=BTCUSDT&orderId=12412093428&timestamp=1771577181765&signature=1d36dfacab467b81ed973de616f6cfb8deb5c1aa4d0ea48d6c6ee0b79a2ac146 HTTP/1.1" 200 None
+2026-02-20 14:16:25,000 | DEBUG    | bot.client | _request:146 | ← HTTP 200 | body={"orderId":12412093428,"symbol":"BTCUSDT","status":"FILLED","clientOrderId":"XO48KFa35cfPxKUs2PrBBs","price":"0.00","avgPrice":"67841.50000","origQty":"0.002","executedQty":"0.002","cumQuote":"135.68300","timeInForce":"GTC","type":"MARKET","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"0.00","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"MARKET","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"time":17715763
+2026-02-20 14:22:43,156 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2026-02-20 14:22:43,269 | WARNING  | bot.client | _sync_server_time:85 | Could not sync server time: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/time (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)")) — using local clock
+2026-02-20 14:22:43,270 | DEBUG    | bot.client | __init__:69 | BinanceClient initialised with base_url=https://testnet.binancefuture.com
+2026-02-20 14:22:43,271 | INFO     | bot.orders | place_order:113 | Validated order params: symbol=BTCUSDT side=BUY type=LIMIT qty=0.002 price=50000.0
+2026-02-20 14:22:43,272 | INFO     | bot.client | place_order:231 | Placing order: symbol=BTCUSDT side=BUY type=LIMIT qty=0.002 price=50000.0
+2026-02-20 14:22:43,273 | DEBUG    | bot.client | _request:123 | → POST https://testnet.binancefuture.com/fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'LIMIT', 'quantity': 0.002, 'price': 50000.0, 'timeInForce': 'GTC', 'timestamp': 1771577563272, 'signature': '5598b352738e1792f593599369d368d10d2f674b98bca0058d346156af82a92e'}
+2026-02-20 14:22:43,274 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (2): testnet.binancefuture.com:443
+2026-02-20 14:22:43,370 | WARNING  | bot.client | _request:139 | Network error attempt 1/3: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/order (Caused by NameResolutionError("HTTPSConnection(host='testnet.binancefuture.com', port=443): Failed to resolve 'testnet.binancefuture.com' ([Errno 11001] getaddrinfo failed)"))
+2026-02-20 14:22:45,377 | DEBUG    | urllib3.connectionpool | _new_conn:1049 | Starting new HTTPS connection (3): testnet.binancefuture.com:443
+2026-02-20 14:22:46,035 | DEBUG    | urllib3.connectionpool | _make_request:544 | https://testnet.binancefuture.com:443 "POST /fapi/v1/order HTTP/1.1" 200 None
+2026-02-20 14:22:46,040 | DEBUG    | bot.client | _request:146 | ← HTTP 200 | body={"orderId":12412440758,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"0pzfd6WY3GHgTYqYC1gALQ","price":"50000.00","avgPrice":"0.00","origQty":"0.002","executedQty":"0.000","cumQty":"0.000","cumQuote":"0.00000","timeInForce":"GTC","type":"LIMIT","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"0.00","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"LIMIT","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"updateT
+2026-02-20 14:22:46,043 | INFO     | bot.orders | place_order:147 | Order placed successfully: orderId=12412440758 status=NEW

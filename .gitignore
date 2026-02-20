@@ -1,0 +1,23 @@
+# Virtual environment — never commit this
+venv/
+.venv/
+env/
+
+# Secret credentials — NEVER commit this
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs — optionally include sample logs but exclude full logs
+# logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
